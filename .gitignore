@@ -13,3 +13,10 @@ csharp/*.suo
 csharp/.vs
 .vs
 .phpunit.result.cache
+.idea/
+.classpath
+.project
+.settings/
+target/
+**/*.iml
+CATALINA*
