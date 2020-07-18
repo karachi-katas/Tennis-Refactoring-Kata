@@ -20,6 +20,10 @@ public class Player {
         return name;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public void wonScore() {
         this.score++;
     }
