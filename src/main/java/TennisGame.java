@@ -4,8 +4,8 @@ public class TennisGame {
     private String player1Name;
     private String player2Name;
 
-    TennisPlayer player1 = new TennisPlayer();
-    TennisPlayer player2 = new TennisPlayer();
+    TennisPlayer player1 = new TennisPlayer("player1");
+    TennisPlayer player2 = new TennisPlayer("player2");
 
     public TennisGame(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -16,49 +16,25 @@ public class TennisGame {
 
         GameState gameState = getGameState(player1, player2);
 
-        if(!gameState.equals(GameState.OTHER)){
+        if (gameState.equals(GameState.OTHER)){
+            return getFormattedGameScore();
+        } else if(gameState.equals(GameState.SAME_SCORES)){
+            return player1.getScoreAsString() + "-All";
+        } else {
             return gameState.gameScore;
         }
-        return getFormattedGameScore();
     }
 
     private String getFormattedGameScore() {
-        if (player1.hasSameScoreAs(player2) && player1.isNotDeuceWith(player2)) {
-            return player1.getScoreAsString() + "-All";
-        } else {
-            return String.format("%s-%s", player1.getScoreAsString(), player2.getScoreAsString());
-        }
-    }
-
-    public void SetP1Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P1Score();
-        }
-
-    }
-
-    public void SetP2Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P2Score();
-        }
-
-    }
-
-    public void P1Score() {
-        player1.addScore();
-    }
-
-    public void P2Score() {
-        player2.addScore();
+        return String.format("%s-%s", player1.getScoreAsString(), player2.getScoreAsString());
     }
 
     public void wonPoint(String player) {
-        if (player == "player1")
-            P1Score();
-        else
-            P2Score();
+        if(player1.scored(player)){
+            player1.addScore();
+        } else {
+            player2.addScore();
+        }
     }
 
     public GameState getGameState(TennisPlayer player1, TennisPlayer player2){
@@ -78,6 +54,9 @@ public class TennisGame {
         }
         if (player2.hasWonAgainst(player1)) {
             return  GameState.PLAYER_2_WON;
+        }
+        if (player1.hasSameScoreAs(player2) && player1.isNotDeuceWith(player2)) {
+            return GameState.SAME_SCORES;
         }
         return GameState.OTHER;
     }

@@ -4,7 +4,10 @@ public enum GameState {
     PLAYER_2_ADVANTAGE("Advantage player2"),
     PLAYER_1_WON("Win for player1"),
     PLAYER_2_WON("Win for player2"),
-    OTHER("N/A");
+    OTHER("N/A"),
+    SAME_SCORES("N/A");
+
+
 
     String gameScore;
 

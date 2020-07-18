@@ -1,9 +1,12 @@
 public class TennisPlayer {
 
     int score;
+    String name;
 
-    public TennisPlayer() {
+    public TennisPlayer(String name) {
         this.score = 0;
+        this.name = name;
+
     }
 
     public String getScoreAsString() {
@@ -42,5 +45,9 @@ public class TennisPlayer {
     public boolean hasSameScoreAs(TennisPlayer player2) {
         return score == player2.score;
 
+    }
+
+    public boolean scored(String player) {
+        return this.name.equals(player);
     }
 }
