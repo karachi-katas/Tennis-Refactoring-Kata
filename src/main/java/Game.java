@@ -27,18 +27,18 @@ public class Game {
         }
 
         else if (player1.isLoveOver(player2)) {
-            return String.format("%s-Love", player1.getPointsString());
+            return String.format("%s-Love", player1.getScoreString());
         }
 
         else if (player2.isLoveOver(player1)) {
-            return String.format("Love-%s", player2.getPointsString());
+            return String.format("Love-%s", player2.getScoreString());
         }
 
         else if (player1.isNotDeuceAndGreaterThan(player2)) {
-            return String.format("%s-%s", player1.getPointsString(), player2.getPointsString());
+            return String.format("%s-%s", player1.getScoreString(), player2.getScoreString());
         }
         else if (player2.isNotDeuceAndGreaterThan(player1)) {
-            return String.format("%s-%s", player1.getPointsString(), player2.getPointsString());
+            return String.format("%s-%s", player1.getScoreString(), player2.getScoreString());
         }
 
         else if (player1.isDeuceWith(player2)) {
@@ -46,16 +46,16 @@ public class Game {
         }
 
         else if (player1.isNotDeuceAndEqualScoreWith(player2)) {
-            return String.format("%s-All", player1.getPointsString());
+            return String.format("%s-All", player1.getScoreString());
         }
 
         return "";
     }
 
-    public void wonPoint(String playerName) {
+    public void wonScore(String playerName) {
         if (playerName.equals(this.player1.getName()))
-            this.player1.wonPoint();
+            this.player1.wonScore();
         else
-            this.player2.wonPoint();
+            this.player2.wonScore();
     }
 }

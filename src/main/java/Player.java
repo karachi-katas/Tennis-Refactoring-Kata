@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Player {
-    private static Map<Integer, String> pointMap = new HashMap<Integer, String>() {{
+    private static Map<Integer, String> scoreMap = new HashMap<Integer, String>() {{
         put(0, "Love");
         put(1, "Fifteen");
         put(2, "Thirty");
@@ -10,7 +10,7 @@ public class Player {
     }};
 
     private String name;
-    private int points;
+    private int score;
 
     public Player(String name) {
         this.name = name;
@@ -20,39 +20,35 @@ public class Player {
         return name;
     }
 
-    public int getPoints() {
-        return points;
-    }
-
-    public void wonPoint() {
-        this.points++;
+    public void wonScore() {
+        this.score++;
     }
 
     boolean isWinnerOver(Player other) {
-        return points >= 4 && other.points >= 0 && (points - other.points) >= 2;
+        return score >= 4 && other.score >= 0 && (score - other.score) >= 2;
     }
 
     boolean hasAdvantageOver(Player other) {
-        return points > other.points && other.points >= 3;
-    }
-
-    boolean isLoveOver(Player other) {
-        return points > 0 && other.points == 0;
+        return score > other.score && other.score >= 3;
     }
 
     boolean isDeuceWith(Player other) {
-        return points == other.points && points >= 3;
+        return score == other.score && score >= 3;
     }
 
     boolean isNotDeuceAndEqualScoreWith(Player other) {
-        return points == other.points && points < 4;
+        return score == other.score && score < 4;
+    }
+
+    boolean isLoveOver(Player other) {
+        return score > 0 && other.score == 0;
     }
 
     boolean isNotDeuceAndGreaterThan(Player other) {
-        return points > other.points && points < 4;
+        return score > other.score && score < 4;
     }
 
-    public String getPointsString() {
-        return pointMap.getOrDefault(points, "");
+    public String getScoreString() {
+        return scoreMap.getOrDefault(score, "");
     }
 }
