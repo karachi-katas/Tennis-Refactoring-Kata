@@ -1,5 +1,6 @@
 
 public class TennisGame {
+    public static final int MIN_DEUCE_POINT = 3;
     public int P1point = 0;
     public int P2point = 0;
 
@@ -15,7 +16,7 @@ public class TennisGame {
 
     public String getScore() {
         String score = "";
-        if (P1point == P2point && P1point < 4) {
+        if (P1point == P2point && P1point < MIN_DEUCE_POINT) {
             if (P1point == 0)
                 score = "Love";
             if (P1point == 1)
@@ -24,8 +25,9 @@ public class TennisGame {
                 score = "Thirty";
             score += "-All";
         }
-        if (P1point == P2point && P1point >= 3)
+        if (P1point == P2point && P1point >= MIN_DEUCE_POINT) {
             score = "Deuce";
+        }
 
         if (P1point > 0 && P2point == 0) {
             if (P1point == 1)
