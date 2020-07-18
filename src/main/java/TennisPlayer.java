@@ -1,12 +1,12 @@
-public class TennisScore {
+public class TennisPlayer {
 
     int score;
 
-    public TennisScore() {
+    public TennisPlayer() {
         this.score = 0;
     }
 
-    public String getScoreAsString() {
+    public String getScoreValueAsString() {
         switch (score) {
             case 0:
                 return "Love";
@@ -20,12 +20,12 @@ public class TennisScore {
         return null;
     }
 
-    public boolean isDeuce(TennisScore tennisScore) {
-        return score == tennisScore.score && score >= 3;
+    public boolean isAtAdvantage(TennisPlayer player2) {
+        return score > player2.score && score - player2.score < 2 && player2.score >= 3;
     }
 
-    public boolean isAtAdvantage(TennisScore tennisScore) {
-        return score > tennisScore.score && score - tennisScore.score < 2 && score >= 3;
+    public boolean hasWonAgainst(TennisPlayer player2) {
+        return score >=4 && player2.score >=0 && (score - player2.score) >=2;
     }
 
     public void addScore() {
