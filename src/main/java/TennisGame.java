@@ -8,6 +8,9 @@ public class TennisGame {
     private String player1Name;
     private String player2Name;
 
+    TennisScore P1TennisScore = new TennisScore();
+    TennisScore P2TennisScore =new TennisScore();
+
     public TennisGame(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
@@ -15,13 +18,8 @@ public class TennisGame {
 
     public String getScore() {
         String score = "";
-        if (P1point == P2point && P1point < 4) {
-            if (P1point == 0)
-                score = "Love";
-            if (P1point == 1)
-                score = "Fifteen";
-            if (P1point == 2)
-                score = "Thirty";
+        if (whenPlayersHaveEqualScoreAndNotDeuce()) {
+            score = P1TennisScore.getScoreAsString();
             score += "-All";
         }
         if (P1point == P2point && P1point >= 3)
@@ -90,6 +88,10 @@ public class TennisGame {
         return score;
     }
 
+    private boolean whenPlayersHaveEqualScoreAndNotDeuce() {
+        return P1point == P2point && P1point < 4;
+    }
+
     public void SetP1Score(int number) {
 
         for (int i = 0; i < number; i++) {
@@ -108,10 +110,12 @@ public class TennisGame {
 
     public void P1Score() {
         P1point++;
+        P1TennisScore.addScore();
     }
 
     public void P2Score() {
         P2point++;
+        P2TennisScore.addScore();
     }
 
     public void wonPoint(String player) {
