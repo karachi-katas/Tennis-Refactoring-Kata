@@ -1,19 +1,21 @@
 
 public class TennisGame {
-    public int P1point = 0;
-    public int P2point = 0;
 
     public String P1res = "";
     public String P2res = "";
-    private String player1Name;
-    private String player2Name;
 
-    public TennisGame(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+    private TennisPlayer player1;
+    private TennisPlayer player2;
+
+    public TennisGame(TennisPlayer player1, TennisPlayer player2) {
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public String getScore() {
+        int P1point = this.player1.getPoints();
+        int P2point = this.player2.getPoints();
+
         String score = "";
         if (P1point == P2point && P1point < 4) {
             if (P1point == 0)
@@ -90,34 +92,10 @@ public class TennisGame {
         return score;
     }
 
-    public void SetP1Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P1Score();
-        }
-
-    }
-
-    public void SetP2Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P2Score();
-        }
-
-    }
-
-    public void P1Score() {
-        P1point++;
-    }
-
-    public void P2Score() {
-        P2point++;
-    }
-
-    public void wonPoint(String player) {
-        if (player == "player1")
-            P1Score();
+    public void wonPoint(String playerName) {
+        if (playerName.equals(this.player1.getName()))
+            this.player1.wonPoint();
         else
-            P2Score();
+            this.player2.wonPoint();
     }
 }
