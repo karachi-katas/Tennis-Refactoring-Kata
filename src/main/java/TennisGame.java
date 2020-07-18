@@ -13,7 +13,6 @@ public class TennisGame {
 
 
     public String getScore() {
-        String score = "";
 
         if (P2point > FORTY && P1point >= LOVE && (P2point - P1point) >= THIRTY) {
             return "Win for player2";
@@ -35,7 +34,7 @@ public class TennisGame {
             return "Deuce";
 
         if (scoreAreEqual()) {
-            score = getStringPointValueFor(P1point);
+            String score = getStringPointValueFor(P1point);
             return score + "-All";
         }
 
