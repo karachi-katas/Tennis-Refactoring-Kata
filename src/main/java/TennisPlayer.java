@@ -6,7 +6,7 @@ public class TennisPlayer {
         this.score = 0;
     }
 
-    public String getScoreValueAsString() {
+    public String getScoreAsString() {
         switch (score) {
             case 0:
                 return "Love";
@@ -34,6 +34,9 @@ public class TennisPlayer {
 
     public boolean isDeuceWith(TennisPlayer player2) {
         return score == player2.score && score >= 3;
+    }
+    public boolean isNotDeuceWith(TennisPlayer player2) {
+        return !isDeuceWith(player2);
     }
 
     public boolean hasSameScoreAs(TennisPlayer player2) {
