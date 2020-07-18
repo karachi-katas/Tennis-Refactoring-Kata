@@ -1,3 +1,5 @@
+package main;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,27 +30,27 @@ public class Player {
         this.score++;
     }
 
-    boolean isWinnerOver(Player other) {
+    public boolean isWinnerOver(Player other) {
         return score >= 4 && other.score >= 0 && (score - other.score) >= 2;
     }
 
-    boolean hasAdvantageOver(Player other) {
+    public boolean hasAdvantageOver(Player other) {
         return score > other.score && other.score >= 3;
     }
 
-    boolean isDeuceWith(Player other) {
+    public boolean isDeuceWith(Player other) {
         return score == other.score && score >= 3;
     }
 
-    boolean isNotDeuceAndEqualScoreWith(Player other) {
+    public boolean isNotDeuceAndEqualScoreWith(Player other) {
         return score == other.score && score < 4;
     }
 
-    boolean isLoveOver(Player other) {
+    public boolean isLoveOver(Player other) {
         return score > 0 && other.score == 0;
     }
 
-    boolean isNotDeuceAndGreaterThan(Player other) {
+    public boolean isNotDeuceAndGreaterThan(Player other) {
         return score > other.score && score < 4;
     }
 
