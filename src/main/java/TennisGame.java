@@ -9,24 +9,10 @@ public class TennisGame {
     public int P2point = 0;
     public String[] scoreName = new String[]{LOVE, FIFTEEN, THIRTY, FORTY};
 
-    public String P1res = "";
-    public String P2res = "";
-
-
     public String getScore() {
-        int maxScore = Math.max(P1point, P2point);
         String score = "";
-//        if (maxScore < 3) {
-//            if (P1point == P2point) {
-//                return P1res + "-All";
-//            }
-//            else {
-//                return P1res + "-" + P2res;
-//            }
-//            // TODO: Simple Counting Case
-//        }
         score = below4Counting(score);
-        score  = somethingForAbove4Counts(score);
+        score = somethingForAbove4Counts(score);
         return score;
     }
 
@@ -83,23 +69,9 @@ public class TennisGame {
 
     void incrementPlayer1Score() {
         P1point++;
-//        if (P1point < 3) {
-//            P1res = scoreName[P1point];
-//        }
-//        else {
-//            if (P1point == P2point) {
-//                P1res = DEUCE;
-//                P2res = DEUCE;
-//            } else {
-//
-//            }
-//        }
-
-
     }
 
     void incrementPlayer2Score() {
         P2point++;
-//        P2res = scoreName[P2point];
     }
 }
