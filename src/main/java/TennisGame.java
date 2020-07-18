@@ -2,6 +2,7 @@
 public class TennisGame {
     public static final int MIN_DEUCE_POINT = 3;
     public static final int MIN_WINNING_DIFF = 2;
+    public static final int MIN_WINNING_SCORE = 4;
 
     private Player player1;
     private Player player2;
@@ -12,49 +13,32 @@ public class TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-        if (player1.getPoint() == player2.getPoint() && player1.getPoint().score < MIN_DEUCE_POINT) {
-            score = player1.getPoint().value + "-All";
+        if (player1.score >= MIN_WINNING_SCORE && (player1.score - player2.score) >= MIN_WINNING_DIFF) {
+            return "Win for player1";
         }
-        if (player1.getPoint().equals(player2.getPoint()) && player1.getPoint().score >= MIN_DEUCE_POINT) {
-            score = "Deuce";
-        }
-
-        if (player1.getPoint() != player2.getPoint() && (player1.getPoint().score < MIN_DEUCE_POINT || player2.getPoint().score < MIN_DEUCE_POINT )) {
-            score = player1.getPoint().value + "-" + player2.getPoint().value;
+        if (player2.score >= MIN_WINNING_SCORE && (player2.score - player1.score) >= MIN_WINNING_DIFF) {
+            return "Win for player2";
         }
 
-        if (player1.getPoint().score > player2.getPoint().score && player2.getPoint().score >= MIN_DEUCE_POINT) {
-            score = "Advantage player1";
+        if (player1.scoreEquals(player2) && player1.score < MIN_DEUCE_POINT) {
+            return player1.getPoint().value + "-All";
+        }
+        if (player1.scoreEquals(player2) && player1.score >= MIN_DEUCE_POINT) {
+            return "Deuce";
         }
 
-        if (player2.getPoint().score > player1.getPoint().score && player1.getPoint().score >= MIN_DEUCE_POINT) {
-            score = "Advantage player2";
+        if (!player1.scoreEquals(player2) && (player1.score < MIN_DEUCE_POINT || player2.score < MIN_DEUCE_POINT )) {
+            return player1.getPoint().value + "-" + player2.getPoint().value;
         }
 
-        if (player1.getPoint().score >= 4 && player2.getPoint().score >= 0 && (player1.getPoint().score - player2.getPoint().score) >= MIN_WINNING_DIFF) {
-            score = "Win for player1";
-        }
-        if (player2.getPoint().score >= 4 && player1.getPoint().score >= 0 && (player2.getPoint().score - player1.getPoint().score) >= MIN_WINNING_DIFF) {
-            score = "Win for player2";
-        }
-        return score;
-    }
-
-    public void SetP1Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P1Score();
+        if (player1.score > player2.score && player2.score >= MIN_DEUCE_POINT) {
+            return "Advantage player1";
         }
 
-    }
-
-    public void SetP2Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P2Score();
+        if (player2.score > player1.score && player1.score >= MIN_DEUCE_POINT) {
+            return "Advantage player2";
         }
-
+        return "";
     }
 
     public void P1Score() {

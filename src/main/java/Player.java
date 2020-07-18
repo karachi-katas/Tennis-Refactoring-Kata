@@ -1,6 +1,7 @@
 public class Player {
     private String name;
     private Point point;
+    public int score;
     private String result;
 
     public static Player CreatePlayerByName(String name){
@@ -10,6 +11,7 @@ public class Player {
     private Player(String name, Point point) {
         this.name = name;
         this.point = point;
+        this.score = 0;
     }
 
     public String getName() {
@@ -37,6 +39,11 @@ public class Player {
     }
 
     public void increment(){
-        this.point = Point.CreateByScore(this.point.score + 1);
+        this.score++;
+        this.point = Point.CreateByScore(this.score);
+    }
+
+    public boolean scoreEquals(Player other){
+        return this.score == other.score;
     }
 }
