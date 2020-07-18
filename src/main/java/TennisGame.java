@@ -11,39 +11,34 @@ public class TennisGame {
     private String[] scoreName = new String[]{ LOVE, FIFTEEN, THIRTY, FORTY };
 
     public String getScore() {
-        String score = "";
-        score = below4Counting();
-        score = somethingForAbove4Counts(score);
-        return score;
-    }
-
-    private String somethingForAbove4Counts(String score) {
-        score = deuceCondition(score);
-        score = advantageCondition(score);
-        score = winningConditions(score);
-        return score;
-    }
-
-    private String winningConditions(String score) {
         int maxPoints = Math.max(P1point, P2point);
-        int delta = Math.abs(P1point - P2point);
 
-        if (maxPoints >= 4 && delta >= 2) {
-            return "Win for " + getHigherPlayer();
+        if (maxPoints < 4) {
+            return processForEarlyGame();
         }
 
-        return score;
+        return processForLateGame();
     }
 
-    private String advantageCondition(String score) {
-        int maxPoints = Math.max(P1point, P2point);
-        int delta = Math.abs(P1point - P2point);
-
-        if (maxPoints >= 4 && delta == 1) {
-            return "Advantage " + getHigherPlayer();
+    private String processForEarlyGame() {
+        if (P1point == P2point) {
+            if (P1point == 3) {
+                return DEUCE;
+            }
+            return scoreName[P1point] + "-All";
         }
 
-        return score;
+        return scoreName[P1point] + "-" + scoreName[P2point];
+    }
+
+    private String processForLateGame() {
+        int delta = Math.abs(P1point - P2point);
+
+        switch (delta) {
+            case 0: return DEUCE;
+            case 1: return "Advantage " + getHigherPlayer();
+            default: return "Win for " + getHigherPlayer();
+        }
     }
 
     private String getHigherPlayer() {
@@ -54,28 +49,6 @@ public class TennisGame {
         } else {
             return "";
         }
-    }
-
-    private String deuceCondition(String score) {
-        if (P1point == P2point && P1point >= 3)
-            score = DEUCE;
-        return score;
-    }
-
-    private String below4Counting() {
-        int maxScore = Math.max(P1point, P2point);
-        if (maxScore <= 3) {
-            if (P1point == P2point) {
-                if (P1point == 3) {
-                    return DEUCE;
-                }
-                return scoreName[P1point] + "-All";
-            } else {
-
-                return scoreName[P1point] + "-" + scoreName[P2point];
-            }
-        }
-        return "";
     }
 
     public void incrementPlayer1Score() {
