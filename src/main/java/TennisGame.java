@@ -14,10 +14,7 @@ public class TennisGame {
 
     public String getScore() {
         String score = "";
-        if (P1point == P2point && P1point <= FORTY) {
-            score = getStringPointValueFor(P1point);
-            score += "-All";
-        }
+        score = scoresAreEqualsAndNotDeuce();
         if (P1point == P2point && P1point >= FORTY)
             score = "Deuce";
 
@@ -60,6 +57,14 @@ public class TennisGame {
             score = "Win for player2";
         }
         return score;
+    }
+
+    private String scoresAreEqualsAndNotDeuce() {
+        if (P1point == P2point && P1point <= FORTY) {
+            String score = getStringPointValueFor(P1point);
+            return score + "-All";
+        }
+        return "";
     }
 
     private String getStringPointValueFor(int points) {
