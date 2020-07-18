@@ -20,7 +20,7 @@ public class TennisPlayer {
             case 3:
                 return "Forty";
         }
-        return null;
+        throw new CannotRepresentScoreAsStringException();
     }
 
     public boolean isAtAdvantage(TennisPlayer player2) {

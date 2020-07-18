@@ -19,15 +19,20 @@ public class TennisGame {
         if (gameState.equals(GameState.OTHER)){
             return getFormattedGameScore();
         } else if(gameState.equals(GameState.SAME_SCORES)){
-            return player1.getScoreAsString() + "-All";
+            return getFormattedGameScoreWhenScoreIsTie();
         } else {
-            return gameState.gameScore;
+            return gameState.formattedGameScore;
         }
     }
 
     private String getFormattedGameScore() {
         return String.format("%s-%s", player1.getScoreAsString(), player2.getScoreAsString());
     }
+
+    private String getFormattedGameScoreWhenScoreIsTie() {
+        return player1.getScoreAsString() + "-All";
+    }
+
 
     public void wonPoint(String player) {
         if(player1.scored(player)){
@@ -52,9 +57,11 @@ public class TennisGame {
         if (player1.hasWonAgainst(player2)) {
             return  GameState.PLAYER_1_WON;
         }
+
         if (player2.hasWonAgainst(player1)) {
             return  GameState.PLAYER_2_WON;
         }
+
         if (player1.hasSameScoreAs(player2) && player1.isNotDeuceWith(player2)) {
             return GameState.SAME_SCORES;
         }

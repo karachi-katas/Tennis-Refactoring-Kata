@@ -9,9 +9,9 @@ public enum GameState {
 
 
 
-    String gameScore;
+    String formattedGameScore;
 
-    GameState(String gameScore) {
-        this.gameScore = gameScore;
+    GameState(String formattedGameScore) {
+        this.formattedGameScore = formattedGameScore;
     }
 }
