@@ -43,14 +43,6 @@ public class TennisGame {
         return P1res + "-" + P2res;
     }
 
-    private boolean playerOneAhead(int P1point, int P2point) {
-        return P1point > P2point && P1point <= FORTY;
-    }
-
-    private boolean playerOneAheadAndPlayerTwoIsLove(int P1point, int P2point) {
-        return P1point > LOVE && P2point == LOVE;
-    }
-
     private boolean deuce() {
         return P1point == P2point && P1point >= FORTY;
     }
