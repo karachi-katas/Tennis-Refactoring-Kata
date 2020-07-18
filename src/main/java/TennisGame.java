@@ -1,23 +1,12 @@
 public class TennisGame {
-    private static final String LOVE    = "Love";
-    private static final String FIFTEEN = "Fifteen";
-    private static final String THIRTY  = "Thirty";
-    private static final String FORTY   = "Forty";
 
-    private static final String DEUCE   = "Deuce";
+    private final String DEUCE = "Deuce";
 
-    private static final String ADVANTAGE = "Advantage %s";
-    private static final String WIN       = "Win for %s";
-
-    private int P1point = 0;
-    private int P2point = 0;
-
-    private String[] scoreName = new String[] { LOVE, FIFTEEN, THIRTY, FORTY };
+    private ScoreCard player1Score = new ScoreCard("player1");
+    private ScoreCard player2Score = new ScoreCard("player2");
 
     public String getScore() {
-        int maxPoints = Math.max(P1point, P2point);
-
-        if (maxPoints < 4) {
+        if (isEarlyGame()) {
             return processForEarlyGame();
         }
 
@@ -25,16 +14,16 @@ public class TennisGame {
     }
 
     private String processForEarlyGame() {
-        if (P1point != P2point) {
-            return scoreName[P1point] + "-" + scoreName[P2point];
+        if (!ScoreCard.areEqual(player1Score, player2Score)) {
+            return player1Score.getScore() + "-" + player2Score.getScore();
         }
 
-        if (P1point < 3) return scoreName[P1point] + "-All";
-        else             return DEUCE;
+        if (player1Score.isNotDeuceWorthy()) return player1Score.getScore() + "-All";
+        else                                 return DEUCE;
     }
 
     private String processForLateGame() {
-        int delta = Math.abs(P1point - P2point);
+        int delta = player1Score.difference(player2Score);
 
         switch (delta) {
             case  0: return DEUCE;
@@ -43,29 +32,23 @@ public class TennisGame {
         }
     }
 
+    private boolean isEarlyGame() {
+        return player1Score.getScore() != ScoreNames.Greater && player2Score.getScore() != ScoreNames.Greater;
+    }
+
     private String getAdvantageString() {
-        return String.format(ADVANTAGE, getHigherPlayer());
+        return String.format("Advantage %s", ScoreCard.getBetterPlayer(player1Score, player2Score));
     }
 
     private String getWinString() {
-        return String.format(WIN, getHigherPlayer());
-    }
-
-    private String getHigherPlayer() {
-        if (P1point > P2point) {
-            return "player1";
-        } else if (P2point > P1point) {
-            return "player2";
-        } else {
-            return "";
-        }
+        return String.format("Win for %s", ScoreCard.getBetterPlayer(player1Score, player2Score));
     }
 
     public void incrementPlayer1Score() {
-        P1point++;
+        player1Score.increment();
     }
 
     public void incrementPlayer2Score() {
-        P2point++;
+        player2Score.increment();
     }
 }
