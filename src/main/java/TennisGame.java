@@ -20,7 +20,7 @@ public class TennisGame {
             score = "Deuce";
         }
 
-        if (player1.getPoint() != player2.getPoint() && player1.getPoint().score < MIN_DEUCE_POINT) {
+        if (player1.getPoint() != player2.getPoint() && (player1.getPoint().score < MIN_DEUCE_POINT || player2.getPoint().score < MIN_DEUCE_POINT )) {
             score = player1.getPoint().value + "-" + player2.getPoint().value;
         }
 

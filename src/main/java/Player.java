@@ -37,7 +37,6 @@ public class Player {
     }
 
     public void increment(){
-        this.point.score++;
-        this.point = Point.CreateByScore(this.point.score);
+        this.point = Point.CreateByScore(this.point.score + 1);
     }
 }
