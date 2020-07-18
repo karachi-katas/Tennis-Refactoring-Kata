@@ -18,6 +18,12 @@ public class TennisGame {
 
     public String getScore() {
         String score = "";
+
+        score = getGameState(player1, player2);
+        if(score != null){
+            return score;
+        }
+
         P1res = player1.getScoreValueAsString();
         P2res = player2.getScoreValueAsString();
         score = P1res + "-" + P2res;
@@ -27,28 +33,7 @@ public class TennisGame {
             score += "-All";
         }
 
-        if (player1.isDeuceWith(player2))
-            score = "Deuce";
-
-        if (player1.isAtAdvantage(player2)) {
-            score = "Advantage player1";
-        }
-
-        if (player2.isAtAdvantage(player1)) {
-            score = "Advantage player2";
-        }
-
-        if (player1.hasWonAgainst(player2)) {
-            score = "Win for player1";
-        }
-        if (player2.hasWonAgainst(player1)) {
-            score = "Win for player2";
-        }
         return score;
-    }
-
-    private boolean whenPlayersHaveEqualScoreAndNotDeuce() {
-        return P1point == P2point && P1point < 4;
     }
 
     public void SetP1Score(int number) {
@@ -82,5 +67,26 @@ public class TennisGame {
             P1Score();
         else
             P2Score();
+    }
+
+    public String getGameState(TennisPlayer player1, TennisPlayer player2){
+        if (player1.isDeuceWith(player2))
+            return "Deuce";
+
+        if (player1.isAtAdvantage(player2)) {
+            return  "Advantage player1";
+        }
+
+        if (player2.isAtAdvantage(player1)) {
+            return  "Advantage player2";
+        }
+
+        if (player1.hasWonAgainst(player2)) {
+            return  "Win for player1";
+        }
+        if (player2.hasWonAgainst(player1)) {
+            return  "Win for player2";
+        }
+        return null;
     }
 }
