@@ -28,12 +28,7 @@ public class TennisGame {
             score = P1res + "-" + P2res;
         }
         if (P2point > LOVE && P1point == LOVE) {
-            if (P2point == FIFTEEN)
-                P2res = "Fifteen";
-            if (P2point == THIRTY)
-                P2res = "Thirty";
-            if (P2point == FORTY)
-                P2res = "Forty";
+            P2res = getStringPointValueFor(P2point);
 
             P1res = "Love";
             score = P1res + "-" + P2res;
