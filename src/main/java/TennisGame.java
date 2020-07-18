@@ -8,8 +8,8 @@ public class TennisGame {
     private String player1Name;
     private String player2Name;
 
-    TennisPlayer p1TennisPlayer = new TennisPlayer();
-    TennisPlayer p2TennisPlayer =new TennisPlayer();
+    TennisPlayer player1 = new TennisPlayer();
+    TennisPlayer player2 =new TennisPlayer();
 
     public TennisGame(String player1Name, String player2Name) {
         this.player1Name = player1Name;
@@ -18,47 +18,30 @@ public class TennisGame {
 
     public String getScore() {
         String score = "";
-        if (P1point == P2point && P1point < 4) {
-            score = p1TennisPlayer.getScoreValueAsString();
+        P1res = player1.getScoreValueAsString();
+        P2res = player2.getScoreValueAsString();
+        score = P1res + "-" + P2res;
+
+        if (player1.hasSameScoreAs(player2) && !player1.isDeuceWith(player2)) {
+            score = player1.getScoreValueAsString();
             score += "-All";
         }
-        if (P1point == P2point && P1point >= 3)
+
+        if (player1.isDeuceWith(player2))
             score = "Deuce";
 
-        if (P1point > 0 && P2point == 0) {
-            P1res = p1TennisPlayer.getScoreValueAsString();
-            P2res = "Love";
-            score = P1res + "-" + P2res;
-        }
-        if (P2point > 0 && P1point == 0) {
-            P2res = p2TennisPlayer.getScoreValueAsString();
-            P1res = "Love";
-            score = P1res + "-" + P2res;
-        }
-
-        if (P1point > P2point && P1point < 4) {
-            P1res = p1TennisPlayer.getScoreValueAsString();
-            P2res = p2TennisPlayer.getScoreValueAsString();
-            score = P1res + "-" + P2res;
-        }
-        if (P2point > P1point && P2point < 4) {
-            P1res = p1TennisPlayer.getScoreValueAsString();
-            P2res = p2TennisPlayer.getScoreValueAsString();
-            score = P1res + "-" + P2res;
-        }
-
-        if (p1TennisPlayer.isAtAdvantage(p2TennisPlayer)) {
+        if (player1.isAtAdvantage(player2)) {
             score = "Advantage player1";
         }
 
-        if (p2TennisPlayer.isAtAdvantage(p1TennisPlayer)) {
+        if (player2.isAtAdvantage(player1)) {
             score = "Advantage player2";
         }
 
-        if (p1TennisPlayer.hasWonAgainst(p2TennisPlayer)) {
+        if (player1.hasWonAgainst(player2)) {
             score = "Win for player1";
         }
-        if (p2TennisPlayer.hasWonAgainst(p1TennisPlayer)) {
+        if (player2.hasWonAgainst(player1)) {
             score = "Win for player2";
         }
         return score;
@@ -86,12 +69,12 @@ public class TennisGame {
 
     public void P1Score() {
         P1point++;
-        p1TennisPlayer.addScore();
+        player1.addScore();
     }
 
     public void P2Score() {
         P2point++;
-        p2TennisPlayer.addScore();
+        player2.addScore();
     }
 
     public void wonPoint(String player) {

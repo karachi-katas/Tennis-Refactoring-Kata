@@ -31,4 +31,13 @@ public class TennisPlayer {
     public void addScore() {
         this.score++;
     }
+
+    public boolean isDeuceWith(TennisPlayer player2) {
+        return score == player2.score && score >= 3;
+    }
+
+    public boolean hasSameScoreAs(TennisPlayer player2) {
+        return score == player2.score;
+
+    }
 }
