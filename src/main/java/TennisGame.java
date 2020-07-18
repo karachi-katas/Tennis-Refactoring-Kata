@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class TennisGame {
     public static final int LOVE = 0;
@@ -11,6 +13,12 @@ public class TennisGame {
     public String P1res = "";
     public String P2res = "";
 
+    static final Map<Integer, String> scoreToString = new HashMap() {{
+        put(LOVE, "Love");
+        put(FIFTEEN, "Fifteen");
+        put(THIRTY, "Thirty");
+        put(FORTY, "Forty");
+    }};
 
     public String getScore() {
 
@@ -68,16 +76,7 @@ public class TennisGame {
     }
 
     private String getStringPointValueFor(int points) {
-        if (points == LOVE)
-            return "Love";
-        if (points == FIFTEEN)
-            return "Fifteen";
-        if (points == THIRTY)
-            return "Thirty";
-        if (points == FORTY)
-            return "Forty";
-
-        return "";
+        return scoreToString.get(points);
     }
 
     public void P1Score() {
