@@ -36,7 +36,7 @@ public class TennisGame {
 
         if (scoreAreEqual()) {
             score = getStringPointValueFor(P1point);
-            score += "-All";
+            return score + "-All";
         }
 
         if (playerOneAheadAndPlayerTwoIsLove(P1point, P2point) ||
