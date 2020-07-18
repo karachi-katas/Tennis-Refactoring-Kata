@@ -1,48 +1,59 @@
-
 public class TennisGame {
-    public static final String THIRTY = "Thirty";
-    public static final String FORTY = "Forty";
-    public static final String FIFTEEN = "Fifteen";
-    public static final String LOVE = "Love";
-    public static final String DEUCE = "Deuce";
-    public int P1point = 0;
-    public int P2point = 0;
-    public String[] scoreName = new String[]{LOVE, FIFTEEN, THIRTY, FORTY};
+    private static final String THIRTY = "Thirty";
+    private static final String FORTY = "Forty";
+    private static final String FIFTEEN = "Fifteen";
+    private static final String LOVE = "Love";
+    private static final String DEUCE = "Deuce";
+
+    private int P1point = 0;
+    private int P2point = 0;
+
+    private String[] scoreName = new String[]{ LOVE, FIFTEEN, THIRTY, FORTY };
 
     public String getScore() {
         String score = "";
-        score = below4Counting(score);
+        score = below4Counting();
         score = somethingForAbove4Counts(score);
         return score;
     }
 
     private String somethingForAbove4Counts(String score) {
         score = deuceCondition(score);
-        score = advantageConditions(score);
+        score = advantageCondition(score);
         score = winningConditions(score);
         return score;
     }
 
-
     private String winningConditions(String score) {
-        if (P1point >= 4 && P2point >= 0 && (P1point - P2point) >= 2) {
-            score = "Win for player1";
+        int maxPoints = Math.max(P1point, P2point);
+        int delta = Math.abs(P1point - P2point);
+
+        if (maxPoints >= 4 && delta >= 2) {
+            return "Win for " + getHigherPlayer();
         }
-        if (P2point >= 4 && P1point >= 0 && (P2point - P1point) >= 2) {
-            score = "Win for player2";
-        }
+
         return score;
     }
 
-    private String advantageConditions(String score) {
-        if (P1point > P2point && P2point >= 3) {
-            score = "Advantage player1";
+    private String advantageCondition(String score) {
+        int maxPoints = Math.max(P1point, P2point);
+        int delta = Math.abs(P1point - P2point);
+
+        if (maxPoints >= 4 && delta == 1) {
+            return "Advantage " + getHigherPlayer();
         }
 
-        if (P2point > P1point && P1point >= 3) {
-            score = "Advantage player2";
-        }
         return score;
+    }
+
+    private String getHigherPlayer() {
+        if (P1point > P2point) {
+            return "player1";
+        } else if (P2point > P1point) {
+            return "player2";
+        } else {
+            return "";
+        }
     }
 
     private String deuceCondition(String score) {
@@ -51,7 +62,7 @@ public class TennisGame {
         return score;
     }
 
-    private String below4Counting(String score) {
+    private String below4Counting() {
         int maxScore = Math.max(P1point, P2point);
         if (maxScore <= 3) {
             if (P1point == P2point) {
@@ -67,11 +78,11 @@ public class TennisGame {
         return "";
     }
 
-    void incrementPlayer1Score() {
+    public void incrementPlayer1Score() {
         P1point++;
     }
 
-    void incrementPlayer2Score() {
+    public void incrementPlayer2Score() {
         P2point++;
     }
 }
