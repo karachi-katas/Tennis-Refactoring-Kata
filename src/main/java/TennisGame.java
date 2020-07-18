@@ -31,13 +31,13 @@ public class TennisGame {
             return "Advantage player1";
         }
 
+        if (deuce())
+            return "Deuce";
+
         if (scoreAreEqual()) {
             score = getStringPointValueFor(P1point);
             score += "-All";
         }
-
-        if (deuce())
-            score = "Deuce";
 
         if (playerOneAheadAndPlayerTwoIsLove(P1point, P2point) ||
                 playerOneAheadAndPlayerTwoIsLove(P2point, P1point)) {
