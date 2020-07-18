@@ -1,32 +1,32 @@
-public class TennisGame {
+public class Game {
 
     public String P1res = "";
     public String P2res = "";
 
-    private TennisPlayer player1;
-    private TennisPlayer player2;
+    private Player player1;
+    private Player player2;
 
-    public TennisGame(TennisPlayer player1, TennisPlayer player2) {
+    public Game(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
     }
 
     public String getScore() {
-        if (player1.getPoints() >= 4 && player2.getPoints() >= 0 && (player1.getPoints() - player2.getPoints()) >= 2) {
+        if (player1.isWinnerOver(player2)) {
             return "Win for player1";
         }
-        else if (player2.getPoints() >= 4 && player1.getPoints() >= 0 && (player2.getPoints() - player1.getPoints()) >= 2) {
+        else if (player2.isWinnerOver(player1)) {
             return "Win for player2";
         }
 
-        else if (player1.getPoints() > player2.getPoints() && player2.getPoints() >= 3) {
+        else if (player1.hasAdvantangeOver(player2)) {
             return "Advantage player1";
         }
-        else if (player2.getPoints() > player1.getPoints() && player1.getPoints() >= 3) {
+        else if (player2.hasAdvantangeOver(player1)) {
             return "Advantage player2";
         }
 
-        else if (player1.getPoints() > 0 && player2.getPoints() == 0) {
+        else if (player1.isLoveOver(player2)) {
             if (player1.getPoints() == 1)
                 P1res = "Fifteen";
             if (player1.getPoints() == 2)
@@ -37,7 +37,7 @@ public class TennisGame {
             P2res = "Love";
             return P1res + "-" + P2res;
         }
-        else if (player2.getPoints() > 0 && player1.getPoints() == 0) {
+        else if (player2.isLoveOver(player1)) {
             if (player2.getPoints() == 1)
                 P2res = "Fifteen";
             if (player2.getPoints() == 2)
@@ -49,7 +49,7 @@ public class TennisGame {
             return P1res + "-" + P2res;
         }
 
-        else if (player1.getPoints() > player2.getPoints() && player1.getPoints() < 4) {
+        else if (player1.isNotDeuceAndGreaterThan(player2)) {
             if (player1.getPoints() == 2)
                 P1res = "Thirty";
             if (player1.getPoints() == 3)
@@ -60,7 +60,7 @@ public class TennisGame {
                 P2res = "Thirty";
             return P1res + "-" + P2res;
         }
-        else if (player2.getPoints() > player1.getPoints() && player2.getPoints() < 4) {
+        else if (player2.isNotDeuceAndGreaterThan(player1)) {
             if (player2.getPoints() == 2)
                 P2res = "Thirty";
             if (player2.getPoints() == 3)
@@ -72,10 +72,10 @@ public class TennisGame {
             return P1res + "-" + P2res;
         }
 
-        else if (player1.getPoints() == player2.getPoints() && player1.getPoints() >= 3)
+        else if (player1.isDeuceWith(player2))
             return "Deuce";
 
-        else if (player1.getPoints() == player2.getPoints() && player1.getPoints() < 4) {
+        else if (player1.isNotDeuceAndEqualScoreWith(player2)) {
             if (player1.getPoints() == 0)
                 return "Love-All";
             if (player1.getPoints() == 1)
