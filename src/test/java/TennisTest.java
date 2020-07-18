@@ -69,9 +69,9 @@ public class TennisTest {
         int highestScore = Math.max(this.player1Score, this.player2Score);
         for (int i = 0; i < highestScore; i++) {
             if (i < this.player1Score)
-                game.wonPoint("player1");
+                game.incrementPlayer1Score();
             if (i < this.player2Score)
-                game.wonPoint("player2");
+                game.incrementPlayer2Score();
         }
         assertEquals(this.expectedScore, game.getScore());
     }

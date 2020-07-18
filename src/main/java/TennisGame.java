@@ -123,34 +123,12 @@ public class TennisGame {
         return score;
     }
 
-    public void SetP1Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P1Score();
-        }
-
-    }
-
-    public void SetP2Score(int number) {
-
-        for (int i = 0; i < number; i++) {
-            P2Score();
-        }
-
-    }
-
-    public void P1Score() {
+    void incrementPlayer1Score()
+    {
         P1point++;
     }
-
-    public void P2Score() {
+    void incrementPlayer2Score()
+    {
         P2point++;
-    }
-
-    public void wonPoint(String player) {
-        if (player == "player1")
-            P1Score();
-        else
-            P2Score();
     }
 }
