@@ -24,12 +24,13 @@ public class TennisGame {
         if (deuce())
             score = "Deuce";
 
-        if (P1point > LOVE && P2point == LOVE) {
+        if (playerOneAheadAndPlayedTwoIsLove()) {
             P1res = getStringPointValueFor(P1point);
 
             P2res = "Love";
             score = P1res + "-" + P2res;
         }
+
         if (P2point > LOVE && P1point == LOVE) {
             P2res = getStringPointValueFor(P2point);
 
@@ -63,6 +64,10 @@ public class TennisGame {
             score = "Win for player2";
         }
         return score;
+    }
+
+    private boolean playerOneAheadAndPlayedTwoIsLove() {
+        return P1point > LOVE && P2point == LOVE;
     }
 
     private boolean deuce() {
