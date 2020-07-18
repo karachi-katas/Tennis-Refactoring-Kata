@@ -1,5 +1,10 @@
 
 public class TennisGame {
+    public static final String THIRTY = "Thirty";
+    public static final String FORTY = "Forty";
+    public static final String FIFTEEN = "Fifteen";
+    public static final String LOVE = "Love";
+    public static final String DEUCE = "Deuce";
     public int P1point = 0;
     public int P2point = 0;
 
@@ -44,25 +49,25 @@ public class TennisGame {
     private String lessThan4Counting(String score) {
         if (P1point > P2point && P1point < 4) {
             if (P1point == 2)
-                P1res = "Thirty";
+                P1res = THIRTY;
             if (P1point == 3)
-                P1res = "Forty";
+                P1res = FORTY;
             if (P2point == 1)
-                P2res = "Fifteen";
+                P2res = FIFTEEN;
             if (P2point == 2)
-                P2res = "Thirty";
+                P2res = THIRTY;
             score = P1res + "-" + P2res;
         }
 
         if (P2point > P1point && P2point < 4) {
             if (P2point == 2)
-                P2res = "Thirty";
+                P2res = THIRTY;
             if (P2point == 3)
-                P2res = "Forty";
+                P2res = FORTY;
             if (P1point == 1)
-                P1res = "Fifteen";
+                P1res = FIFTEEN;
             if (P1point == 2)
-                P1res = "Thirty";
+                P1res = THIRTY;
             score = P1res + "-" + P2res;
         }
         return score;
@@ -71,13 +76,13 @@ public class TennisGame {
     private String player2InitialAdvantage(String score) {
         if (P2point > 0 && P1point == 0) {
             if (P2point == 1)
-                P2res = "Fifteen";
+                P2res = FIFTEEN;
             if (P2point == 2)
-                P2res = "Thirty";
+                P2res = THIRTY;
             if (P2point == 3)
-                P2res = "Forty";
+                P2res = FORTY;
 
-            P1res = "Love";
+            P1res = LOVE;
             score = P1res + "-" + P2res;
         }
         return score;
@@ -86,13 +91,13 @@ public class TennisGame {
     private String player1InitialAdvantage(String score) {
         if (P1point > 0 && P2point == 0) {
             if (P1point == 1)
-                P1res = "Fifteen";
+                P1res = FIFTEEN;
             if (P1point == 2)
-                P1res = "Thirty";
+                P1res = THIRTY;
             if (P1point == 3)
-                P1res = "Forty";
+                P1res = FORTY;
 
-            P2res = "Love";
+            P2res = LOVE;
             score = P1res + "-" + P2res;
         }
         return score;
@@ -100,20 +105,21 @@ public class TennisGame {
 
     private String deuceCondition(String score) {
         if (P1point == P2point && P1point >= 3)
-            score = "Deuce";
+            score = DEUCE;
         return score;
     }
 
     private String equalAndBelow4(String score) {
         if (P1point == P2point && P1point < 4) {
             if (P1point == 0)
-                score = "Love";
+                score = LOVE;
             if (P1point == 1)
-                score = "Fifteen";
+                score = FIFTEEN;
             if (P1point == 2)
-                score = "Thirty";
+                score = THIRTY;
             score += "-All";
         }
+
         return score;
     }
 
