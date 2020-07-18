@@ -15,6 +15,21 @@ public class TennisGame {
     public String getScore() {
         String score = "";
 
+        if (P2point > FORTY && P1point >= LOVE && (P2point - P1point) >= THIRTY) {
+            return "Win for player2";
+        }
+
+        if (P1point > FORTY && P2point >= LOVE && (P1point - P2point) >= THIRTY) {
+            return "Win for player1";
+        }
+
+        if (P2point > P1point && P1point >= FORTY) {
+            return "Advantage player2";
+        }
+
+        if (P1point > P2point && P2point >= FORTY) {
+            return "Advantage player1";
+        }
 
         if (scoreAreEqual()) {
             score = getStringPointValueFor(P1point);
@@ -31,35 +46,20 @@ public class TennisGame {
             score = P1res + "-" + P2res;
         }
 
-        if (P1point > P2point && P1point <= FORTY) {
+        if (playerOneAhead(P1point, P2point) || playerOneAhead(P2point, P1point)) {
             P1res = getStringPointValueFor(P1point);
             P2res = getStringPointValueFor(P2point);
             score = P1res + "-" + P2res;
         }
-        if (P2point > P1point && P2point <= FORTY) {
-            P2res = getStringPointValueFor(P2point);
-            P1res = getStringPointValueFor(P1point);
-            score = P1res + "-" + P2res;
-        }
 
-        if (P1point > P2point && P2point >= FORTY) {
-            score = "Advantage player1";
-        }
-
-        if (P2point > P1point && P1point >= FORTY) {
-            score = "Advantage player2";
-        }
-
-        if (P1point > FORTY && P2point >= LOVE && (P1point - P2point) >= THIRTY) {
-            score = "Win for player1";
-        }
-        if (P2point > FORTY && P1point >= LOVE && (P2point - P1point) >= THIRTY) {
-            score = "Win for player2";
-        }
         return score;
     }
 
-    private boolean playerOneAheadAndPlayerTwoIsLove(int scoreOne, int scoreTwo) {
+    private boolean playerOneAhead(int P1point, int P2point) {
+        return P1point > P2point && P1point <= FORTY;
+    }
+
+    private boolean playerOneAheadAndPlayerTwoIsLove(int P1point, int P2point) {
         return P1point > LOVE && P2point == LOVE;
     }
 
