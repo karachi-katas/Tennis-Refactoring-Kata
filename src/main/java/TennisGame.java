@@ -10,7 +10,7 @@ public class TennisGame {
     public int P1point = 0;
     public int P2point = 0;
 
-    static final Map<Integer, String> scoreToString = new HashMap() {{
+    static final Map<Integer, String> SCORE_TO_STRING = new HashMap() {{
         put(LOVE, "Love");
         put(FIFTEEN, "Fifteen");
         put(THIRTY, "Thirty");
@@ -73,7 +73,7 @@ public class TennisGame {
     }
 
     private String getStringPointValueFor(int points) {
-        return scoreToString.get(points);
+        return SCORE_TO_STRING.get(points);
     }
 
     public void P1Score() {
