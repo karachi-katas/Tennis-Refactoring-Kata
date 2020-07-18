@@ -24,15 +24,10 @@ public class TennisGame {
         if (deuce())
             score = "Deuce";
 
-        if (playerOneAheadAndPlayerTwoIsLove(P1point, P2point)) {
+        if (playerOneAheadAndPlayerTwoIsLove(P1point, P2point) ||
+                playerOneAheadAndPlayerTwoIsLove(P2point, P1point)) {
             P1res = getStringPointValueFor(P1point);
             P2res = getStringPointValueFor(P2point);
-            score = P1res + "-" + P2res;
-        }
-
-        if (P2point > LOVE && P1point == LOVE) {
-            P2res = getStringPointValueFor(P2point);
-            P1res = getStringPointValueFor(P1point);
             score = P1res + "-" + P2res;
         }
 
