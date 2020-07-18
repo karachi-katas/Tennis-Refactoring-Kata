@@ -39,20 +39,9 @@ public class TennisGame {
             return score + "-All";
         }
 
-        if (playerOneAheadAndPlayerTwoIsLove(P1point, P2point) ||
-                playerOneAheadAndPlayerTwoIsLove(P2point, P1point)) {
-            P1res = getStringPointValueFor(P1point);
-            P2res = getStringPointValueFor(P2point);
-            score = P1res + "-" + P2res;
-        }
-
-        if (playerOneAhead(P1point, P2point) || playerOneAhead(P2point, P1point)) {
-            P1res = getStringPointValueFor(P1point);
-            P2res = getStringPointValueFor(P2point);
-            score = P1res + "-" + P2res;
-        }
-
-        return score;
+        P1res = getStringPointValueFor(P1point);
+        P2res = getStringPointValueFor(P2point);
+        return P1res + "-" + P2res;
     }
 
     private boolean playerOneAhead(int P1point, int P2point) {
